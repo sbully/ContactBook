@@ -72,7 +72,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PageFolder\CreateContact.xaml">
+    <Page Include="Modal\EditContact.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -85,8 +85,8 @@
     <Compile Include="Modal\Create.xaml.cs">
       <DependentUpon>Create.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PageFolder\CreateContact.xaml.cs">
-      <DependentUpon>CreateContact.xaml</DependentUpon>
+    <Compile Include="Modal\EditContact.xaml.cs">
+      <DependentUpon>EditContact.xaml</DependentUpon>
     </Compile>
     <Compile Include="PageFolder\ViewListContact.xaml.cs">
       <DependentUpon>ViewListContact.xaml</DependentUpon>

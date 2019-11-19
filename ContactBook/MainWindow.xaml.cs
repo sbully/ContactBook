@@ -41,10 +41,8 @@ namespace ContactBook
                 case "ListContact":
                     this.Navigate(new ViewListContact(persi,persiprof));
                     break;
-                case "Create":
-                    this.Navigate(new CreateContact(persi));
-                    break;
                 default:
+                    this.Navigate(new ViewListContact(persi, persiprof));
                     break;
             }
 

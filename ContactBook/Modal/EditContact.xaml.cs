@@ -1,6 +1,4 @@
-﻿using BookContactInterface;
-using BookContactLibrary;
-using BookContactStructure;
+﻿using BookContactLibrary;
 using ContactBookViewModel;
 using System;
 using System.Collections.Generic;
@@ -15,21 +13,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ContactBook.PageFolder
+namespace ContactBook.Modal
 {
     /// <summary>
-    /// Logique d'interaction pour CreateContact.xaml
+    /// Logique d'interaction pour EditContact.xaml
     /// </summary>
-    public partial class CreateContact : Page, INotifyPropertyChanged
+    public partial class EditContact : Window, INotifyPropertyChanged
     {
-        IPersistance<CONTACTS> persi;
+        private ViewContact vContact;
+
         public event PropertyChangedEventHandler PropertyChanged;
 
-
-        private ViewContact vContact;
         public ViewContact VContact
         {
             get { return vContact; }
@@ -38,11 +34,10 @@ namespace ContactBook.PageFolder
                 if (vContact != value)
                 {
                     vContact = value;
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(VContact)));
                 }
             }
         }
-
-        
         private List<Profession> listProf;
         public List<Profession> ListProf
         {
@@ -56,14 +51,24 @@ namespace ContactBook.PageFolder
                 }
             }
         }
-        public CreateContact(IPersistance<CONTACTS> _p)
+
+        public EditContact(ViewContact vc, List<Profession> _listP)
         {
-            persi = _p;
-            VContact = new ViewContact();
-            DataContext = VContact;
             InitializeComponent();
+            VContact = vc;
+            ListProf = _listP;
+            CBOX.SelectedIndex = listProf.FindIndex(x => x.Libele_Profession == vc.Profession.Libele_Profession);
+
+        }
+        private void Sauve_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = true;
         }
 
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = false;
 
+        }
     }
 }

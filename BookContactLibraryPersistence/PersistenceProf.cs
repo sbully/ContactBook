@@ -66,6 +66,7 @@ namespace BookContactLibraryPersistence
                 listF.Add(p);
             }
             SqlRdr.Close();
+            SqlConnection.Close();
             return listF;
         }
 

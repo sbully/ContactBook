@@ -1,12 +1,13 @@
-﻿<Window x:Class="ContactBook.Modal.Create"
+﻿<Window x:Class="ContactBook.Modal.EditContact"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ContactBook.Modal"
         mc:Ignorable="d"
-        Title="Create" Height="450" Width="800"
-        DataContext="{Binding RelativeSource={RelativeSource self}}">
+        Title="EditContact" Height="450" Width="800"
+    DataContext="{Binding RelativeSource={RelativeSource self}}">
+    
     <Window.Resources>
         <Style x:Key="TextErrorStyle" TargetType="{x:Type TextBox}">
             <Setter Property="Validation.ErrorTemplate">
@@ -67,15 +68,14 @@
             </Grid>
             <Grid Margin="0,20,0,0">
                 <TextBlock  HorizontalAlignment="Left" Text="Profession:" />
-                <ComboBox   HorizontalAlignment="Right" MinWidth="150" ItemsSource="{Binding ListProf}" DisplayMemberPath="Libele_Profession"
-                            SelectedItem="{Binding VContact.Profession}"
-                            />
+                <ComboBox Name="CBOX"  HorizontalAlignment="Right" MinWidth="150" ItemsSource="{Binding ListProf}" DisplayMemberPath="Libele_Profession" 
+                            SelectedItem="{Binding VContact.Profession, UpdateSourceTrigger=PropertyChanged}"/>
             </Grid>
             <Grid Margin="0,20,0,0">
-                <Button Height="25" Width="120" Content="Sauvegarder" HorizontalAlignment="Left"
-                        IsEnabled="{Binding VContact.IsOk}" 
+                <Button Height="25" Width="120" Content="Sauvegarder" HorizontalAlignment="Left" IsEnabled="{Binding VContact.IsOk}" 
                         Click="Sauve_Click"/>
-                <Button Height="25" Width="120" Content="Annuler" HorizontalAlignment="Right" Click="Cancel_Click" />
+                <Button Height="25" Width="120" Content="Annuler" HorizontalAlignment="Right"  
+                        Click="Cancel_Click"/>
             </Grid>
         </StackPanel>
     </Grid>

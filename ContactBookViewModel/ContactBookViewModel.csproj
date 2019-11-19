@@ -44,5 +44,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewContact.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BookContactLibrary\BookContactLibrary.csproj">
+      <Project>{737E37EA-F024-4821-8095-B5DAB257C44F}</Project>
+      <Name>BookContactLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

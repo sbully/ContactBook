@@ -26,7 +26,7 @@ namespace BookContactLibrary
             {
                 listProf.Add(p);
             }
-            return new List<Profession>();
+            return listProf;
         }
 
     }

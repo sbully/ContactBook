@@ -22,7 +22,25 @@ namespace BookContactLibraryPersistence
 
         public bool Create(CONTACTS instance)
         {
-            throw new NotImplementedException();
+            Sqlcde = new SqlCommand();
+            Sqlcde.Connection = SqlConnection;
+            Sqlcde.CommandText = "INSERTCONTACT";
+            Sqlcde.CommandType = System.Data.CommandType.StoredProcedure;
+            SqlConnection.Open();
+            Sqlcde.Parameters.Add(new SqlParameter("@pNom_Contact", System.Data.SqlDbType.VarChar)).Value = instance.Nom_Contact;
+            Sqlcde.Parameters.Add(new SqlParameter("@pPrenom_Contact", System.Data.SqlDbType.VarChar)).Value = instance.Prenom_Contact;
+            Sqlcde.Parameters.Add(new SqlParameter("@pRue_Contact", System.Data.SqlDbType.VarChar)).Value = instance.Rue_Contact;
+            Sqlcde.Parameters.Add(new SqlParameter("@pCodePostal_Contact", System.Data.SqlDbType.VarChar)).Value = instance.Rue_Contact;
+            Sqlcde.Parameters.Add(new SqlParameter("@pVille_Contact", System.Data.SqlDbType.VarChar)).Value = instance.Ville_Contact;
+            Sqlcde.Parameters.Add(new SqlParameter("@pId_Profession", System.Data.SqlDbType.Int)).Value = instance.Profession.Id_Profession;
+
+            int nbr = Sqlcde.ExecuteNonQuery();
+            SqlConnection.Close();
+            if (nbr == 1)
+            {
+                return true;
+            }
+            return false;
         }
 
         public bool Delete(int id)
@@ -32,7 +50,24 @@ namespace BookContactLibraryPersistence
 
         public bool Delete(CONTACTS instance)
         {
-            throw new NotImplementedException();
+            Sqlcde = new SqlCommand();
+            Sqlcde.Connection = SqlConnection;
+            Sqlcde.CommandText = "DeleteContact";
+            Sqlcde.CommandType = System.Data.CommandType.StoredProcedure;
+
+            Sqlcde.Parameters.Add(new SqlParameter("@pId", System.Data.SqlDbType.VarChar)).Value = instance.Id_Contact;
+
+            SqlConnection.Open();
+            int nbr = Sqlcde.ExecuteNonQuery();
+            SqlConnection.Close();
+            if (nbr == 1)
+            {
+
+                return true;
+            }
+           
+            return false;
+            
         }
 
         public List<CONTACTS> Select(int id)
@@ -82,6 +117,7 @@ namespace BookContactLibraryPersistence
                 //contact = (CONTACTS)contact2;
                 listContact.Add(contact);
             }
+            SqlRdr.Close();
             SqlConnection.Close();
             
             return listContact;
@@ -99,7 +135,26 @@ namespace BookContactLibraryPersistence
 
         public bool Update(CONTACTS instance)
         {
-            throw new NotImplementedException();
+            Sqlcde = new SqlCommand();
+            Sqlcde.Connection = SqlConnection;
+            Sqlcde.CommandText = "UpdateContact";
+            Sqlcde.CommandType = System.Data.CommandType.StoredProcedure;
+            SqlConnection.Open();
+            Sqlcde.Parameters.Add(new SqlParameter("@pId_Contact", System.Data.SqlDbType.Int)).Value = instance.Id_Contact;
+            Sqlcde.Parameters.Add(new SqlParameter("@pNom_Contact", System.Data.SqlDbType.VarChar)).Value = instance.Nom_Contact;
+            Sqlcde.Parameters.Add(new SqlParameter("@pPrenom_Contact", System.Data.SqlDbType.VarChar)).Value = instance.Prenom_Contact;
+            Sqlcde.Parameters.Add(new SqlParameter("@pRue_Contact", System.Data.SqlDbType.VarChar)).Value = instance.Rue_Contact;
+            Sqlcde.Parameters.Add(new SqlParameter("@pCodePostal_Contact", System.Data.SqlDbType.VarChar)).Value = instance.Rue_Contact;
+            Sqlcde.Parameters.Add(new SqlParameter("@pVille_Contact", System.Data.SqlDbType.VarChar)).Value = instance.Ville_Contact;
+            Sqlcde.Parameters.Add(new SqlParameter("@pId_Profession", System.Data.SqlDbType.Int)).Value = instance.Profession.Id_Profession;
+
+            int nbr = Sqlcde.ExecuteNonQuery();
+            SqlConnection.Close();
+            if (nbr == 1)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

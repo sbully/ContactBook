@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BookContactLibrary;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,6 +26,32 @@ namespace ContactBookViewModel
             }
         }
 
+        private int id_Contact;
+        public int Id_Contact
+        {
+            get { return id_Contact; }
+            set
+            {
+                if (id_Contact != value)
+                {
+                    id_Contact = value;
+                }
+            }
+        }
+        private Profession profession;
+        public Profession Profession
+        {
+            get { return profession; }
+            set
+            {
+                if (profession != value)
+                {
+                    profession = value;
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(Profession)));
+                }
+            }
+        }
+
         private string nom_Contact;
         public string Nom_Contact
         {
@@ -45,7 +72,7 @@ namespace ContactBookViewModel
             get { return prenom_Contact; }
             set
             {
-                if(prenom_Contact != value)
+                if (prenom_Contact != value)
                 {
                     prenom_Contact = value;
                     GetSomeChanged(nameof(Prenom_Contact), this, value);
@@ -96,22 +123,23 @@ namespace ContactBookViewModel
         }
 
 
-        public bool HasErrors {
+        public bool HasErrors
+        {
             get
             {
                 bool HaveError = false;
                 lock (ErrorList)
                 {
-                    if(string.IsNullOrEmpty(nom_Contact) || string.IsNullOrEmpty(prenom_Contact) ||
+                    if (string.IsNullOrEmpty(nom_Contact) || string.IsNullOrEmpty(prenom_Contact) ||
                         string.IsNullOrEmpty(rue_Contact) || string.IsNullOrEmpty(codePostal_Contact) || string.IsNullOrEmpty(ville_Contact))
                     {
                         HaveError = true;
 
                     }
 
-                    foreach(string key in ErrorList.Keys)
+                    foreach (string key in ErrorList.Keys)
                     {
-                        if(ErrorList[key] != null)
+                        if (ErrorList[key] != null)
                         {
                             HaveError = true;
                             break;
@@ -152,7 +180,7 @@ namespace ContactBookViewModel
         {
             PropertyChanged(sender, new PropertyChangedEventArgs(propertyname));
 
-            if(propertyname == "Nom_Contact" || propertyname == "Prenom_Contact" || propertyname == "Rue_Contact" 
+            if (propertyname == "Nom_Contact" || propertyname == "Prenom_Contact" || propertyname == "Rue_Contact"
                 || propertyname == "CodePostal_Contact" || propertyname == "Ville_Contact")
             {
                 GetErrorProperty(value, propertyname).ContinueWith(task =>
@@ -202,7 +230,7 @@ namespace ContactBookViewModel
                        {
                            listError.Add("Ville_Contact", new List<string> { "L'adresse ne peut contenir que des lettres, des espaces et des tirets" });
                        }
-                       break; 
+                       break;
                }
                return listError;
            });
@@ -210,5 +238,33 @@ namespace ContactBookViewModel
 
         }
 
+        public static implicit operator ViewContact(Contact _c)
+        {
+            return new ViewContact
+            {
+                id_Contact = _c.Id_Contact,
+                nom_Contact = _c.Nom_Contact,
+                prenom_Contact = _c.Prenom_Contact,
+                rue_Contact = _c.Rue_Contact,
+                codePostal_Contact = _c.CodePostal_Contact,
+                ville_Contact = _c.Ville_Contact,
+                profession = _c.Profession
+
+            };
+        }
+        public Contact GetContact()
+        {
+            return new Contact
+            {
+                Id_Contact = this.Id_Contact,
+                Nom_Contact = this.Nom_Contact,
+                Prenom_Contact = this.Prenom_Contact,
+                Rue_Contact = this.Rue_Contact,
+                CodePostal_Contact = this.CodePostal_Contact,
+                Ville_Contact = this.Ville_Contact,
+                Profession = this.Profession
+            };
+
+        }
     }
 }

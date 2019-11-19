@@ -38,6 +38,7 @@ namespace ContactBook.Modal
                 if (vContact != value)
                 {
                     vContact = value;
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(VContact)));
                 }
             }
         }
@@ -57,12 +58,24 @@ namespace ContactBook.Modal
             }
         }
 
-        public Create()
+        public Create(List<Profession> _listP)
         {
             //persi = _p;
-            VContact = new ViewContact();
-            DataContext = VContact;
+
             InitializeComponent();
+            VContact = new ViewContact();
+            ListProf = _listP;
+        }
+
+        private void Sauve_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = true;
+        }
+
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = false;
+
         }
     }
 }

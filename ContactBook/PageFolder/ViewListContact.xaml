@@ -12,9 +12,11 @@
 
     <Grid>
         <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Margin="50">
-        <Button Width="120" Height="20" Content="Nouveau" Tag="Create" />
-            <Button Width="120" Height="20" Content="Supprimer" Margin="0,25,0,0"/>
-            <Button Width="120" Height="20" Content="Editer" Margin="0,25,0,0"/>
+        <Button Width="120" Height="20" Content="Nouveau" Tag="Create" Click="CreateButton_Click"/>
+
+            <Button Width="120" Height="20" Content="Editer" Margin="0,25,0,0" Click="EditButton_Click"/>
+            
+            <Button Width="120" Height="20" Content="Supprimer" Margin="0,25,0,0" Click="DeleteButton_Click"/>
         </StackPanel>
         <DataGrid Width="Auto" 
                   x:Name="ContactDataGrid" 
@@ -31,7 +33,7 @@
                 <DataGridTextColumn x:Name="nomColumn" Width="SizeToCells" Header="Nom" Binding="{Binding Nom_Contact}"/>
                 <DataGridTextColumn x:Name="prenomColumn" Width="SizeToCells" Header="Prenom" Binding="{Binding Prenom_Contact}"/>
                 <DataGridTextColumn x:Name="rueColumn" Width="SizeToCells" Header="Rue" Binding="{Binding Rue_Contact}"/>
-                <DataGridTextColumn x:Name="cdepostalColumn" Width="SizeToHeader" Header="CodePostal" Binding="{Binding CodePostal_Contac}"/>
+                <DataGridTextColumn x:Name="cdepostalColumn" Width="SizeToHeader" Header="CodePostal" Binding="{Binding CodePostal_Contact}"/>
                 <DataGridTextColumn x:Name="villeColumn" Width="SizeToCells" Header="Ville" Binding="{Binding Ville_Contact}"/>
                 <DataGridTextColumn x:Name="ProfessionColumn" Width="SizeToCells" Header="Profession" Binding="{Binding Profession.Libele_Profession}"/>
             </DataGrid.Columns>

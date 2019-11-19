@@ -31,6 +31,15 @@ namespace BookContactLibrary
                 PosteNumber_Profession = _p.PosteNumber_Profession
             };
         }
+        public PROFESSIONS GetPROFESSIONS()
+        {
+            return new PROFESSIONS
+            {
+                Id_Profession = this.Id_Profession,
+                Libele_Profession = this.Libele_Profession,
+                PosteNumber_Profession = this.PosteNumber_Profession
+            };
+        }
        
         
 

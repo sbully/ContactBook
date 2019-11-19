@@ -2,6 +2,7 @@
 using BookContactLibrary;
 using BookContactLibraryPersistence;
 using BookContactStructure;
+using ContactBook.Modal;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -89,19 +90,44 @@ namespace ContactBook.PageFolder
 
         private void CreateButton_Click(object sender, RoutedEventArgs e)
         {
-            Button b = (Button)sender;
-            MainWindow parent = Window.GetWindow(this) as MainWindow;
-            parent.LoadingPage(b.Tag.ToString());
+            //Button b = (Button)sender;
+            //MainWindow parent = Window.GetWindow(this) as MainWindow;
+            //parent.LoadingPage(b.Tag.ToString());
+            Create create = new Create(ListProf);
+            create.ShowDialog();
+            
+            if (create.DialogResult == true)
+            {
+                Contact c = create.VContact.GetContact();
+                c.SaveContact(persi);
+            }
+
         }
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if (SelectedContact != null)
+            {
+                EditContact editC = new EditContact(selectedContact, ListProf);
+                editC.ShowDialog();
+                Contact c = editC.VContact.GetContact();
+                if (editC.DialogResult == true)
+                {
+                    string toto = "toto";
+                }
+            }
+            
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if(SelectedContact != null)
+            {
+                Contact c = this.SelectedContact;
+                c.DeleteContact(persi);
+            }
+            ListContact listC = new ListContact();
+            Listcon = listC.GetListContacts(persi);
         }
 
     }
